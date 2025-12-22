@@ -1,0 +1,21 @@
+name: CI for AnvilCraftMod
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - releases/**
+      - dev/**
+    paths:
+      - src/**
+      - gradle/**
+      - build.gradle
+      - dependencies.gradle
+      - gradle.properties
+      - settings.gradle
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
