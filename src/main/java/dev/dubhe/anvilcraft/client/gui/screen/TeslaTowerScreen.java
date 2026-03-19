@@ -1,11 +1,11 @@
 package dev.dubhe.anvilcraft.client.gui.screen;
 
-import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.api.taslatower.TeslaFilter;
 import dev.dubhe.anvilcraft.client.gui.component.TeslaTowerButton;
+import dev.dubhe.anvilcraft.constant.SharedTextures;
 import dev.dubhe.anvilcraft.inventory.TeslaTowerMenu;
-import dev.dubhe.anvilcraft.network.AddTeslaFilterPacket;
-import dev.dubhe.anvilcraft.network.RemoveTeslaFilterPacket;
+import dev.dubhe.anvilcraft.network.TeslaAddFilterPacket;
+import dev.dubhe.anvilcraft.network.TeslaRemoveFilterPacket;
 import it.unimi.dsi.fastutil.Pair;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
@@ -26,12 +26,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings({"MismatchedReadAndWriteOfArray", "FieldCanBeLocal"})
 public class TeslaTowerScreen extends AbstractContainerScreen<TeslaTowerMenu> {
-
-    private static final ResourceLocation CONTAINER_LOCATION =
-        AnvilCraft.of("textures/gui/container/machine/background/tesla_tower.png");
-
-    public static final ResourceLocation ACTIVE_SILENCER_SLIDER =
-        AnvilCraft.of("textures/gui/container/machine/active_silencer_slider.png");
+    private static final ResourceLocation BACKGROUND = SharedTextures.bg("machine", "tesla_tower");
 
     private static final int SCROLL_BAR_HEIGHT = 120;
     private static final int SCROLL_BAR_TOP_POS_Y = 35;
@@ -123,7 +118,7 @@ public class TeslaTowerScreen extends AbstractContainerScreen<TeslaTowerMenu> {
         String id = filteredFilters.get(actualIndex).left().getId();
         String arg = filteredFilters.get(actualIndex).right();
         addWhiteFilter(id, arg);
-        PacketDistributor.sendToServer(new AddTeslaFilterPacket(id, arg));
+        PacketDistributor.sendToServer(new TeslaAddFilterPacket(id, arg));
         refreshFilterList();
     }
 
@@ -134,7 +129,7 @@ public class TeslaTowerScreen extends AbstractContainerScreen<TeslaTowerMenu> {
         String id = whiteFilters.get(actualIndex).left().getId();
         String arg = whiteFilters.get(actualIndex).right();
         removeWhiteFilter(id, arg);
-        PacketDistributor.sendToServer(new RemoveTeslaFilterPacket(id, arg));
+        PacketDistributor.sendToServer(new TeslaRemoveFilterPacket(id, arg));
         refreshFilterList();
     }
 
@@ -366,9 +361,9 @@ public class TeslaTowerScreen extends AbstractContainerScreen<TeslaTowerMenu> {
             int scrollY = (int) (posY + (scrollOff / (float) totalCount) * SCROLL_BAR_HEIGHT);
             scrollY = Mth.clamp(scrollY, posY, maxY);
 
-            guiGraphics.blit(ACTIVE_SILENCER_SLIDER, posX, scrollY, 0, 0, 5, 9, 10, 9);
+            guiGraphics.blit(SharedTextures.SMALL_SLIDER, posX, scrollY, 0, 0, 5, 9, 10, 9);
         } else {
-            guiGraphics.blit(ACTIVE_SILENCER_SLIDER, posX, posY, 0, 0, 5, 9, 10, 9);
+            guiGraphics.blit(SharedTextures.SMALL_SLIDER, posX, posY, 0, 0, 5, 9, 10, 9);
         }
     }
 
@@ -407,7 +402,7 @@ public class TeslaTowerScreen extends AbstractContainerScreen<TeslaTowerMenu> {
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(CONTAINER_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(BACKGROUND, i, j, 0, 0, this.imageWidth, this.imageHeight);
     }
 
     @Override
