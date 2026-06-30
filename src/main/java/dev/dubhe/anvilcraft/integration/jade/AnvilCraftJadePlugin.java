@@ -49,9 +49,10 @@ public class AnvilCraftJadePlugin implements IWailaPlugin {
         registration.registerBlockDataProvider(ChargerProvider.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(DischargerProvider.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(SmartBlockPlacerProvider.INSTANCE, Block.class);
-        registration.registerItemStorage(CreativeCrateProvider.INSTANCE, CreativeCrateBlockEntity.class);
-        registration.registerFluidStorage(CreativeFluidTankProvider.INSTANCE, CreativeFluidTankBlockEntity.class);
-        registration.registerFluidStorage(LargeFluidTankProvider.INSTANCE, LargeFluidTankBlock.class);
+        System.out.println(LargeFluidTankProvider.INSTANCE);
+        // registration.registerItemStorage(CreativeCrateProvider.INSTANCE, CreativeCrateBlockEntity.class);
+        // registration.registerFluidStorage(CreativeFluidTankProvider.INSTANCE, CreativeFluidTankBlockEntity.class);
+        // registration.registerFluidStorage(LargeFluidTankProvider.INSTANCE, LargeFluidTankBlock.class);
     }
 
     @Override
@@ -66,8 +67,8 @@ public class AnvilCraftJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(ChargerClientProvider.INSTANCE, Block.class);
         registration.registerBlockComponent(DischargerClientProvider.INSTANCE, Block.class);
         registration.registerBlockComponent(SmartBlockPlacerClientProvider.INSTANCE, Block.class);
-        registration.registerItemStorageClient(CreativeCrateProvider.INSTANCE);
-        registration.registerFluidStorageClient(CreativeFluidTankProvider.INSTANCE);
-        registration.registerFluidStorageClient(LargeFluidTankProvider.INSTANCE);
+        // registration.registerItemStorageClient(CreativeCrateProvider.INSTANCE);
+        // registration.registerFluidStorageClient(CreativeFluidTankProvider.INSTANCE);
+        // registration.registerFluidStorageClient(LargeFluidTankProvider.INSTANCE);
     }
 }

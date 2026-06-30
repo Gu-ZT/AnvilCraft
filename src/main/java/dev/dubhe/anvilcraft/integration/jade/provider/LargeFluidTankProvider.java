@@ -26,13 +26,13 @@ import snownee.jade.util.FluidTextHelper;
 import java.util.Collections;
 import java.util.List;
 
-public class LargeFluidTankProvider extends FluidStorageProvider.Extension {
+public class LargeFluidTankProvider { //extends FluidStorageProvider.Extension {
     public static final LargeFluidTankProvider INSTANCE = new LargeFluidTankProvider();
 
     private LargeFluidTankProvider() {
     }
 
-    @Override
+    // @Override
     public @Nullable List<ViewGroup<FluidView.Data>> getGroups(Accessor<?> accessor) {
         if (!(accessor instanceof BlockAccessor blockAccessor)) return null;
         ResourceHandler<FluidResource> handler = accessor.getLevel().getCapability(
@@ -55,7 +55,7 @@ public class LargeFluidTankProvider extends FluidStorageProvider.Extension {
         ))));
     }
 
-    @Override
+    // @Override
     public List<ClientViewGroup<FluidView>> getClientGroups(Accessor<?> accessor, List<ViewGroup<FluidView.Data>> groups) {
         if (groups.isEmpty() || groups.getFirst().views.isEmpty()) return ImmutableList.of();
         FluidView.Data data = groups.getFirst().views.getFirst();
@@ -79,17 +79,17 @@ public class LargeFluidTankProvider extends FluidStorageProvider.Extension {
         return Collections.singletonList(new ClientViewGroup<>(Collections.singletonList(view)));
     }
 
-    @Override
+    // @Override
     public boolean shouldRequestData(Accessor<?> accessor) {
         return true;
     }
 
-    @Override
+    // @Override
     public Identifier getUid() {
         return AnvilCraft.of("large_fluid_tank");
     }
 
-    @Override
+    // @Override
     public int getDefaultPriority() {
         return 1;
     }
